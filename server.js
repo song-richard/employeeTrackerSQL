@@ -3,7 +3,6 @@ const mysql = require('mysql2/promise');
 const dotenv = require('dotenv');
 dotenv.config();
 
-
 async function seedDatabase() {
     try {
         const connection = await mysql.createConnection({
@@ -12,10 +11,11 @@ async function seedDatabase() {
             user: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
             database: process.env.DB_DATABASE,
-        })
-        console.log("Connected to database!")
+        });
 
+        console.log("Connected to database!");
 
+        //Seed 'department' table
         const departmentQuestions = [
             {
                 type: 'input',
@@ -25,10 +25,30 @@ async function seedDatabase() {
         ];
         const departmentData = await inquirer.prompt(departmentQuestions);
         await connection.execute('INSERT INTO department (name) VALUES (?)', [departmentData.name]);
-        console.log('Data inserted successfully.');
+        console.log('Department data inserted successfully.');
+
+        const roleQuestions = [
+            {
+                type: 'input',
+                name: 'title',
+                message: 'Enter role title:',
+            },
+            {
+                type: 'input',
+                name: 'salary',
+                message: 'Enter role salary:',
+            },
+            {
+                type: 'input',
+                name: 'department_id',
+                message: 'Enter department ID for this role:'
+            },
+        ]
+
+
 
     } catch (err) {
-        console.error('Error connecting to the database:' ,err)
+        console.error('Error connecting to the database:' ,err);
     };
 };
 
