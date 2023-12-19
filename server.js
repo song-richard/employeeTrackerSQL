@@ -27,6 +27,8 @@ async function seedDatabase() {
         await connection.execute('INSERT INTO department (name) VALUES (?)', [departmentData.name]);
         console.log('Department data inserted successfully.');
 
+//----------------------------------------//
+        //Seed 'role' table
         const roleQuestions = [
             {
                 type: 'input',
@@ -45,7 +47,6 @@ async function seedDatabase() {
             },
         ];
 
-        //Seed 'role' table
         const roleData = await inquirer.prompt(roleQuestions);
         await connection.execute('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [
             roleData.title,
@@ -53,6 +54,39 @@ async function seedDatabase() {
             roleData.department_id,
         ]);
         console.log("Role data inserted successfully");
+
+//----------------------------------------//
+        //Seed 'employee' table
+        const employeeQuestions = [
+            {
+                type: 'input',
+                name: 'first_name',
+                message: 'Enter employee first name:'
+            },
+            {
+                type: 'input',
+                name: 'last_name',
+                message: 'Enter employee last name:'
+            },
+            {
+                type: 'input',
+                name: 'role_id',
+                message: 'Enter role ID for the employee:'
+            },
+            {
+                type: 'input',
+                name: 'manager_id',
+                message: 'Enter manager ID for the employee'
+            },
+        ];
+
+        const employeeData = await inquirer.prompt(employeeQuestions);
+        await connection.execute('INSERT INTO employee (first_name, last_name, role_id, manager_id VALUES (?, ?, ?, ?', [
+            employeeData.first_name,
+            employeeData.last_name,
+            employeeData.role_id,
+            employeeData.manager_id,
+        ]);
 
     } catch (err) {
         console.error('Error connecting to the database:' ,err);
