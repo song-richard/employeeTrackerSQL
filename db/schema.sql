@@ -5,14 +5,14 @@ USE company_db;
 
 CREATE TABLE IF NOT EXISTS department (
     id INT PRIMARY KEY,
-    name VARCHAR(30),
+    name VARCHAR(30)
 );
 
 CREATE TABLE IF NOT EXISTS role (
     id INT PRIMARY KEY,
     title VARCHAR(30),
     salary DECIMAL,
-    department_id INT,
+    department_id INT
 );
 
 CREATE TABLE IF NOT EXISTS employee (
@@ -20,5 +20,5 @@ CREATE TABLE IF NOT EXISTS employee (
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     role_id INT,
-    manager_id, INT
-);
+    manager_id INT
+); 
