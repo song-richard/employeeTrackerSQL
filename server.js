@@ -81,13 +81,15 @@ async function seedDatabase() {
         ];
 
         const employeeData = await inquirer.prompt(employeeQuestions);
-        await connection.execute('INSERT INTO employee (first_name, last_name, role_id, manager_id VALUES (?, ?, ?, ?', [
+        await connection.execute('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', [
             employeeData.first_name,
             employeeData.last_name,
             employeeData.role_id,
             employeeData.manager_id,
         ]);
+        console.log("Employee data inserted successfully");
 
+        await connection.end();
     } catch (err) {
         console.error('Error connecting to the database:' ,err);
     };
