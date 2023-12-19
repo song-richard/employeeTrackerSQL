@@ -4,8 +4,8 @@ CREATE DATABASE company_db;
 USE company_db;
 
 CREATE TABLE IF NOT EXISTS department (
-    id INT PRIMARY KEY,
-    name VARCHAR(30)
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS role (
