@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 
-async function connectToDatabase() {
+async function seedDatabase() {
     try {
         await mysql.createConnection({
             host: process.env.DB_HOST,
@@ -14,9 +14,19 @@ async function connectToDatabase() {
             // database: process.env.DB_DATABASE,
         })
         console.log("Connected to database!")
+
+        const departmentQuestions = [
+            {
+                type: 'input',
+                name: 'name',
+                message: 'Enter departnment name',
+            },
+        ];
+        const departmentData = await inquirer.createPromptModule(departmentQuestions);
+
     } catch (err) {
         console.error('Error connecting to the database:' ,err)
     };
 };
 
-connectToDatabase();
+seedDatabase();
