@@ -43,7 +43,14 @@ async function seedDatabase() {
                 name: 'department_id',
                 message: 'Enter department ID for this role:'
             },
-        ]
+        ];
+
+        const roleData = await inquirer.prompt(roleQuestions);
+        await connection.execute('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [
+            roleData.title,
+            roleData.salary,
+            roleData.department_id,
+        ]);
 
 
 
