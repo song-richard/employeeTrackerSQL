@@ -95,6 +95,16 @@ async function connectToDatabase() {
     };
 };
 
+//View Departments
+async function viewDepartments(connection) {
+    try {
+        const [rows] = await connection.execute('SELECT * FROM department');
+        console.table(rows);
+    } catch (err) {
+        console.error('Error viewing departments:', err);
+    }
+}
+
 async function mainMenu() {
     const connection = await connectToDatabase();
 
@@ -133,4 +143,4 @@ async function mainMenu() {
 
 };
 
-connectToDatabase();
+mainMenu();
