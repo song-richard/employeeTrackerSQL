@@ -103,8 +103,48 @@ async function viewDepartments(connection) {
     } catch (err) {
         console.error('Error viewing departments:', err);
     }
-}
+};
 
+//View Roles
+async function viewRoles(connection) {
+    try {
+        const [rows] = await connection.execute('SELECT * FROM role');
+        console.table(rows);
+    } catch (err) {
+        console.error('Error viewing roles:', err);
+    };
+};
+
+//View Employees
+async function viewEmployees(connection) {
+    try {
+        const [rows] = await connection.execute('SELECT * FROM employee');
+        console.table(rows);
+    } catch (err) {
+        console.error('Error viewing employees:', err);
+    };
+};
+
+async function addDepartment(connection) {
+    const departmentQuestions = [
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter department name:',
+        },
+    ];
+
+    const departmentData = await inquirer.prompt(departmentQuestions);
+
+    try {
+        await connection.execute('INSERT INTO department (name) VALUES (?)', [departmentData.name]);
+        console.log("Department added successfully!");
+    } catch (err) {
+        console.error('Error adding department:', err);
+    }
+};
+
+//Main Menu
 async function mainMenu() {
     const connection = await connectToDatabase();
 
