@@ -45,14 +45,14 @@ async function seedDatabase() {
             },
         ];
 
+        //Seed 'role' table
         const roleData = await inquirer.prompt(roleQuestions);
         await connection.execute('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [
             roleData.title,
             roleData.salary,
             roleData.department_id,
         ]);
-
-
+        console.log("Role data inserted successfully");
 
     } catch (err) {
         console.error('Error connecting to the database:' ,err);
