@@ -3,7 +3,7 @@ const mysql = require('mysql2/promise');
 const dotenv = require('dotenv');
 dotenv.config();
 
-async function seedDatabase() {
+async function connectToDatabase() {
     try {
         const connection = await mysql.createConnection({
             host: process.env.DB_HOST,
@@ -95,4 +95,42 @@ async function seedDatabase() {
     };
 };
 
-seedDatabase();
+async function mainMenu() {
+    const connection = await connectToDatabase();
+
+    const choices = [
+        'View All Departments',
+        'View All Roles',
+        'View All Employees',
+        'Add a Department',
+        'Add a Role',
+    ];
+
+    const { option } = await inquirer.prompt({
+        type: 'list',
+        name: 'option',
+        message: 'Select an option:',
+        choices: choices,
+    });
+
+    switch (option) {
+        case 'View All Departments':
+            await viewDepartments(connection);
+            break;
+        case 'View All Roles':
+            await viewRoles(connection);
+            break;
+        case 'View All Employees':
+            await viewEmployees(connection);
+            break;
+        case 'Add a Department':
+            await addDepartment(connection);
+            break;
+        case 'Add a Role':
+            await addRole(connection);
+            break;
+    };
+
+};
+
+connectToDatabase();
