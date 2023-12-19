@@ -6,7 +6,7 @@ dotenv.config();
 
 async function seedDatabase() {
     try {
-        await mysql.createConnection({
+        const connection = mysql.createConnection({
             host: process.env.DB_HOST,
             port: process.env.DB_PORT,
             user: process.env.DB_USER,
@@ -23,6 +23,7 @@ async function seedDatabase() {
             },
         ];
         const departmentData = await inquirer.createPromptModule(departmentQuestions);
+        connection.execute('INSERT INTO department (name) VALUES (?)', [departmentData.name]);
 
     } catch (err) {
         console.error('Error connecting to the database:' ,err)
