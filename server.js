@@ -108,41 +108,45 @@ async function addRole(connection) {
 
 //Main Menu
 async function mainMenu() {
-    const connection = await connectToDatabase();
+    let mainMenuOn = true;
 
-    const choices = [
-        'View All Departments',
-        'View All Roles',
-        'View All Employees',
-        'Add a Department',
-        'Add a Role',
-    ];
+    while(mainMenuOn) {
+        const connection = await connectToDatabase();
 
-    const { option } = await inquirer.prompt({
-        type: 'list',
-        name: 'option',
-        message: 'Select an option:',
-        choices: choices,
-    });
-
-    switch (option) {
-        case 'View All Departments':
-            await viewDepartments(connection);
-            break;
-        case 'View All Roles':
-            await viewRoles(connection);
-            break;
-        case 'View All Employees':
-            await viewEmployees(connection);
-            break;
-        case 'Add a Department':
-            await addDepartment(connection);
-            break;
-        case 'Add a Role':
-            await addRole(connection);
-            break;
+        const choices = [
+            'View All Departments',
+            'View All Roles',
+            'View All Employees',
+            'Add a Department',
+            'Add a Role',
+        ];
+    
+        const { option } = await inquirer.prompt({
+            type: 'list',
+            name: 'option',
+            message: 'Select an option:',
+            choices: choices,
+        });
+    
+        switch (option) {
+            case 'View All Departments':
+                await viewDepartments(connection);
+                break;
+            case 'View All Roles':
+                await viewRoles(connection);
+                break;
+            case 'View All Employees':
+                await viewEmployees(connection);
+                break;
+            case 'Add a Department':
+                await addDepartment(connection);
+                break;
+            case 'Add a Role':
+                await addRole(connection);
+                break;
+        };
+        await connection.end();
     };
-
 };
 
 mainMenu();
