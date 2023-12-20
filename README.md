@@ -5,7 +5,7 @@ The Employee Tracker App is a command-line application that allows users to mana
 
 ## Demo
 - [Employee Tracker Demo](./assets/employeeTracker%20Demo.mov)
-- Demo Link: https://github.com/song-richard/employeeTrackerSQL/blob/main/assets/employeeTracker%20Demo.mov
+- Demo Link: https://github.com/song-richard/employeeTrackerSQL/tree/main/assets
 
 ## Features
 - View all departments, roles, and employees
