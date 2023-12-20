@@ -29,7 +29,7 @@ async function viewDepartments(connection) {
         console.table(rows);
     } catch (err) {
         console.error('Error viewing departments:', err);
-    }
+    };
 };
 
 //View Roles
@@ -69,7 +69,7 @@ async function addDepartment(connection) {
         console.log("Department added successfully!");
     } catch (err) {
         console.error('Error adding department:', err);
-    }
+    };
 };
 
 //Add Role
@@ -103,7 +103,7 @@ async function addRole(connection) {
         console.log("Role added successfully!");
     } catch (err) {
         console.error('Error adding role:', err);
-    }
+    };
 };
 
 //Add Employee
@@ -143,8 +143,8 @@ async function addEmployee(connection) {
         console.log("Employee added successfully!");
     } catch (err) {
         console.error('Error adding employee:', err);
-    }
-}
+    };
+};
 
 //Main Menu
 async function mainMenu() {
