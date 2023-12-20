@@ -106,6 +106,46 @@ async function addRole(connection) {
     }
 };
 
+//Add Employee
+async function addEmployee(connection) {
+    const employeeQuestions = [
+        {
+            type: 'input',
+            name: 'first_name',
+            message: 'Enter employee first name:',
+        },
+        {
+            type: 'input',
+            name: 'last_name',
+            message: 'Enter employee last name:',
+        },
+        {
+            type: 'input',
+            name: 'role_id',
+            message: 'Enter role ID for the employee:',
+        },
+        {
+            type: 'input',
+            name: 'manager_id',
+            message: 'Enter manager ID for the employee:',
+        },
+    ];
+
+    const employeeData = await inquirer.prompt(employeeQuestions);
+
+    try {
+        await connection.execute('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', [
+            employeeData.first_name,
+            employeeData.last_name,
+            employeeData.role_id,
+            employeeData.manager_id,
+        ]);
+        console.log("Employee added successfully!");
+    } catch (err) {
+        console.error('Error adding employee:', err);
+    }
+}
+
 //Main Menu
 async function mainMenu() {
     let mainMenuOn = true;
@@ -119,6 +159,7 @@ async function mainMenu() {
             'View All Employees',
             'Add a Department',
             'Add a Role',
+            'Add a Employee',
         ];
     
         const { option } = await inquirer.prompt({
@@ -143,6 +184,9 @@ async function mainMenu() {
                 break;
             case 'Add a Role':
                 await addRole(connection);
+                break;
+            case 'Add a Employee':
+                await addEmployee(connection);
                 break;
         };
         await connection.end();
