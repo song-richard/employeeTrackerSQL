@@ -15,8 +15,6 @@ The Employee Tracker App is a command-line application that allows users to mana
 - Update an employee's role
 
 ## Technologies Used
-- HTML
-- CSS
 - JavaScript
 - Node.js
 - MySQL
